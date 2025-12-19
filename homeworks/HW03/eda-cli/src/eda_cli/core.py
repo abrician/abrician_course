@@ -191,13 +191,14 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
     flags["too_many_missing"] = max_missing_share > 0.5
 
     # --- эвристика: константные колонки (если есть unique) ---
-    if "unique" in missing_df.columns:
-        constant_columns = missing_df.index[missing_df["unique"] == 1].tolist()
-    else:
-        constant_columns = []
-
+    constant_columns = [
+        col.name
+        for col in summary.columns
+        if col.unique == 1
+        ]
     flags["has_constant_columns"] = len(constant_columns) > 0
     flags["constant_columns"] = constant_columns
+
 
     # --- эвристика: много пропусков ---
     HIGH_MISSING_THRESHOLD = 0.3
@@ -210,6 +211,15 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
     flags["has_high_missing_columns"] = len(high_missing_columns) > 0
     flags["high_missing_columns"] = high_missing_columns
 
+    penalties: List[str] = []
+    if flags["has_constant_columns"]:
+        penalties.append("constant_columns")
+    
+    if flags["has_high_missing_columns"]:
+        penalties.append("high_missing_columns")
+    
+    flags["penalties"] = penalties
+
     # --- quality score ---
     score = 1.0
     score -= max_missing_share
@@ -218,9 +228,9 @@ def compute_quality_flags(summary: DatasetSummary, missing_df: pd.DataFrame) -> 
         score -= 0.2
     if flags["too_many_columns"]:
         score -= 0.1
-    if flags["has_constant_columns"]:
+    if "constant_columns" in penalties:
         score -= 0.1
-    if flags["has_high_missing_columns"]:
+    if "high_missing_columns" in penalties:
         score -= 0.1
 
     flags["quality_score"] = max(0.0, min(1.0, score))

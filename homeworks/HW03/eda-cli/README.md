@@ -51,6 +51,20 @@ uv run eda-cli report data/example.csv --out-dir reports
 - `hist_*.png` – гистограммы числовых колонок;
 - `missing_matrix.png` – визуализация пропусков;
 - `correlation_heatmap.png` – тепловая карта корреляций.
+```md
+Дополнительные параметры команды `report`:
+
+- `--max-hist-columns` – максимальное число числовых колонок,
+  для которых строятся гистограммы;
+- `--title` – заголовок отчёта (используется как `# ...` в `report.md`).
+
+Пример запуска с дополнительными параметрами:
+
+```bash
+uv run eda-cli report data/example.csv \
+  --out-dir reports_example \
+  --max-hist-columns 4 \
+  --title "EDA по учебному датасету"
 
 ## Тесты
 

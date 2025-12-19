@@ -66,7 +66,8 @@ def report(
     out_dir: str = typer.Option("reports", help="Каталог для отчёта."),
     sep: str = typer.Option(",", help="Разделитель в CSV."),
     encoding: str = typer.Option("utf-8", help="Кодировка файла."),
-    max_hist_columns: int = typer.Option(6, help="Максимум числовых колонок для гистограмм."),
+    max_hist_columns: int = typer.Option(6, help="Максимум числовых колонок для гистограмм."),\
+    title: str = typer.Option("EDA-отчёт", help="Заголовок отчёта (Markdown)."),
 ) -> None:
     """
     Сгенерировать полный EDA-отчёт:
@@ -112,6 +113,16 @@ def report(
         f.write(f"- Слишком мало строк: **{quality_flags['too_few_rows']}**\n")
         f.write(f"- Слишком много колонок: **{quality_flags['too_many_columns']}**\n")
         f.write(f"- Слишком много пропусков: **{quality_flags['too_many_missing']}**\n\n")
+        f.write("### Дополнительные эвристики качества\n\n")
+        f.write(f"- Есть константные колонки: **{quality_flags['has_constant_columns']}**\n")
+        f.write(f"- Константные колонки: **{quality_flags['constant_columns']}**\n")
+        f.write(f"- Есть колонки с большим числом пропусков: **{quality_flags['has_high_missing_columns']}**\n")
+        f.write(f"- Колонки с большим числом пропусков: **{quality_flags['high_missing_columns']}**\n")
+
+        if quality_flags.get("penalties"):
+            f.write(f"- Штрафы, учтённые в quality_score: **{quality_flags['penalties']}**\n")
+        f.write("\n")
+
 
         f.write("## Колонки\n\n")
         f.write("См. файл `summary.csv`.\n\n")
