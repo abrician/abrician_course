@@ -71,3 +71,52 @@ uv run eda-cli report data/example.csv \
 ```bash
 uv run pytest -q
 ```
+# EDA CLI + HTTP Dataset Quality Service
+
+Проект оценивает качество датасетов для обучения моделей. 
+Содержит:
+- CLI для анализа CSV (EDA, отчёты, визуализации)
+- HTTP API для удалённой оценки качества и получения флагов
+
+## HTTP API
+
+### GET /health
+Простейший health-check сервиса.
+
+### POST /quality
+Принимает агрегированные признаки и возвращает оценку качества.
+
+### POST /quality-from-csv
+Принимает CSV-файл и возвращает оценку качества с использованием EDA-ядра.
+
+### POST /quality-flags-from-csv
+
+Новый дополнительный эндпоинт HW04.
+
+**Путь:** `POST /quality-flags-from-csv`
+
+Принимает CSV-файл и возвращает полный набор флагов качества,
+включая эвристики, реализованные в HW03:
+- too_few_rows
+- too_many_missing
+- has_constant_columns
+- has_high_missing_columns
+- penalties
+- quality_score
+
+
+## Запуск
+
+```bash
+cd homeworks/HW04/eda-cli
+uv sync
+uv run pytest -q
+uv run eda-cli report data/example.csv --out-dir reports_example
+
+## Запуск HTTP-сервиса
+
+Для запуска HTTP API используется FastAPI + Uvicorn:
+
+```bash
+uv run uvicorn eda_cli.api:app --reload --port 8000
+
