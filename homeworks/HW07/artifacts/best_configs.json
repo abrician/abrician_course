@@ -1,0 +1,17 @@
+{
+  "dataset_01": {
+    "method": "KMeans",
+    "k": 5,
+    "criterion": "silhouette score"
+  },
+  "dataset_02": {
+    "method": "DBSCAN",
+    "eps": 0.6,
+    "criterion": "silhouette score on non-noise points"
+  },
+  "dataset_04": {
+    "method": "KMeans",
+    "k": 5,
+    "criterion": "silhouette score"
+  }
+}
