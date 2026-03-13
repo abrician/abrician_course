@@ -1,0 +1,23 @@
+{
+    "dataset": "EMNIST",
+    "seed": 42,
+    "model": {
+        "type": "MLP",
+        "input_dim": 784,
+        "hidden_layers": [
+            256,
+            128
+        ],
+        "output_dim": 47,
+        "activation": "ReLU",
+        "dropout": 0.3,
+        "batchnorm": false
+    },
+    "training": {
+        "optimizer": "Adam",
+        "lr": 0.001,
+        "batch_size": 128,
+        "max_epochs": 30,
+        "early_stopping_patience": 4
+    }
+}
