@@ -1,0 +1,5 @@
+experiment_id,task,dataset,seed,model_summary,optimizer,lr,epochs_trained,best_val_accuracy,test_accuracy,precision,recall,mean_iou,notes
+C1,classification,STL10,42,SimpleCNN,Adam,0.001,5,0.464,,,,,baseline CNN
+C2,classification,STL10,42,SimpleCNN + aug,Adam,0.001,5,0.494,,,,,augmentation
+C3,classification,STL10,42,ResNet18 head-only,Adam,0.001,5,0.948,,,,,frozen backbone
+C4,classification,STL10,42,ResNet18 finetune,Adam,0.0001,5,0.958,,,,,layer4 + fc
