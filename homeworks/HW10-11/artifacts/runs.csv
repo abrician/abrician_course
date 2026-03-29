@@ -2,4 +2,6 @@ experiment_id,task,dataset,seed,model_summary,optimizer,lr,epochs_trained,best_v
 C1,classification,STL10,42,SimpleCNN,Adam,0.001,5,0.464,,,,,baseline CNN
 C2,classification,STL10,42,SimpleCNN + aug,Adam,0.001,5,0.494,,,,,augmentation
 C3,classification,STL10,42,ResNet18 head-only,Adam,0.001,5,0.948,,,,,frozen backbone
-C4,classification,STL10,42,ResNet18 finetune,Adam,0.0001,5,0.958,,,,,layer4 + fc
+C4,classification,STL10,42,ResNet18 finetune,Adam,0.0001,5,0.958,0.952625,,,,layer4 + fc
+V1,segmentation,OxfordIIITPet,42,DeepLabV3,,,0,,,,,0.5798270188470349,baseline mask
+V2,segmentation,OxfordIIITPet,42,DeepLabV3 + smoothing,,,0,,,,,0.5802122678747427,avg_pool smoothing
