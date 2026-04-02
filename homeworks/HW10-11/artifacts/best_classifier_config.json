@@ -5,5 +5,13 @@
     "val_accuracy": 0.958,
     "test_accuracy": 0.952625,
     "seed": 42,
-    "transforms": "resnet_transform"
+    "transforms": "resnet_transform",
+    "optimizer": "Adam",
+    "learning_rate": 0.0001,
+    "lr": 0.0001,
+    "batch_size": 64,
+    "epochs": 5,
+    "epochs_trained": 5,
+    "weight_decay": 0.0,
+    "finetune": "layer4+fc"
 }
