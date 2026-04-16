@@ -1,4 +1,4 @@
-question,answer,sources
+question,answer,retrieved_sources
 What is BERT?,"BERT is a transformer-based model designed for NLP understanding tasks. Natural language processing (NLP) is a subfield of linguistics, computer science, 
     and artificial intelligence concerned with the interactions between computers and human language. Transformers are a type of neural network a","[10, 2, 8]"
 What is machine learning?,"Machine learning is a field of artificial intelligence that uses statistical techniques 
