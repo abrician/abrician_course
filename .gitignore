@@ -57,7 +57,6 @@ logs/
 *.old
 
 # data
-*.pt 
 *.zip
 *.gz
 *.homeworks/HW08-09/data/
