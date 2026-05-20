@@ -1,0 +1,69 @@
+Модуль os и работа с файловой системой в Python
+
+Модуль os предоставляет функции для работы с операционной системой: файлы, папки, переменные среды, пути.
+
+Импорт:
+import os
+import os.path
+from pathlib import Path  # современный способ работы с путями
+
+Работа с путями (os.path):
+# Текущая директория
+os.getcwd()                          # → '/Users/user/project'
+
+# Объединение путей (правильный способ)
+os.path.join("data", "ml_docs", "file.txt")  # → 'data/ml_docs/file.txt'
+
+# Проверки
+os.path.exists("file.txt")           # существует ли файл/папка
+os.path.isfile("file.txt")           # это файл?
+os.path.isdir("data/")               # это папка?
+
+# Части пути
+os.path.basename("/path/to/file.txt")  # → 'file.txt'
+os.path.dirname("/path/to/file.txt")   # → '/path/to'
+os.path.splitext("file.txt")           # → ('file', '.txt')
+
+Работа с директориями:
+# Список файлов в папке
+os.listdir("data/")
+
+# Рекурсивный обход всех файлов
+for root, dirs, files in os.walk("data/"):
+    for file in files:
+        full_path = os.path.join(root, file)
+        print(full_path)
+
+# Создание папки
+os.makedirs("data/new_folder", exist_ok=True)  # exist_ok=True — не ошибка если уже есть
+
+# Удаление файла
+os.remove("file.txt")
+
+Чтение и запись файлов:
+# Чтение текстового файла
+with open("file.txt", "r", encoding="utf-8") as f:
+    content = f.read()           # всё содержимое как строка
+    lines = f.readlines()        # список строк
+
+# Запись в файл
+with open("output.txt", "w", encoding="utf-8") as f:
+    f.write("Привет, мир!")
+
+# Дозапись в конец файла
+with open("log.txt", "a", encoding="utf-8") as f:
+    f.write("Новая строка\n")
+
+Современный способ — pathlib:
+from pathlib import Path
+
+data_dir = Path("data")
+files = list(data_dir.rglob("*.txt"))  # все .txt файлы рекурсивно
+
+for file_path in files:
+    text = file_path.read_text(encoding="utf-8")
+    print(f"Файл: {file_path.name}, Размер: {len(text)} символов")
+
+Переменные среды:
+import os
+api_key = os.getenv("OPENAI_API_KEY", "default_value")  # безопасное чтение

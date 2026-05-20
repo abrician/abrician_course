@@ -1,0 +1,80 @@
+Классы и объектно-ориентированное программирование в Python (OOP)
+
+Класс — это шаблон для создания объектов. Объект — это экземпляр класса, который содержит данные (атрибуты) и поведение (методы).
+
+Определение класса:
+class Dog:
+    """Класс, описывающий собаку."""
+
+    # Конструктор — вызывается при создании объекта
+    def __init__(self, name, breed):
+        self.name = name    # атрибут объекта
+        self.breed = breed
+
+    # Метод объекта
+    def bark(self):
+        return f"{self.name} говорит: Гав!"
+
+    def __str__(self):
+        return f"Собака {self.name} породы {self.breed}"
+
+# Создание объекта (экземпляра)
+my_dog = Dog("Рекс", "Лабрадор")
+print(my_dog.name)     # → Рекс
+print(my_dog.bark())   # → Рекс говорит: Гав!
+print(my_dog)          # → Собака Рекс породы Лабрадор
+
+Наследование:
+Класс может наследовать атрибуты и методы от другого класса.
+
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "..."
+
+class Cat(Animal):
+    def speak(self):        # переопределяем метод
+        return f"{self.name} говорит: Мяу!"
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} говорит: Гав!"
+
+animals = [Cat("Мурка"), Dog("Рекс")]
+for animal in animals:
+    print(animal.speak())  # полиморфизм
+
+Специальные методы (dunder methods):
+- __init__ — инициализация объекта
+- __str__ — строковое представление
+- __repr__ — представление для отладки
+- __len__ — длина объекта
+- __eq__ — сравнение объектов
+
+Атрибуты класса и объекта:
+class Counter:
+    count = 0          # атрибут класса (общий для всех экземпляров)
+
+    def __init__(self):
+        Counter.count += 1
+        self.id = Counter.count  # атрибут объекта
+
+c1 = Counter()  # Counter.count = 1
+c2 = Counter()  # Counter.count = 2
+
+Декоратор @property:
+Позволяет обращаться к методу как к атрибуту.
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    @property
+    def area(self):
+        import math
+        return math.pi * self.radius ** 2
+
+c = Circle(5)
+print(c.area)   # вызываем как атрибут, без скобок

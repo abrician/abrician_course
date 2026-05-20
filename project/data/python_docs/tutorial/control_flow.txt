@@ -1,0 +1,79 @@
+Управление потоком выполнения в Python (Control Flow)
+
+Управление потоком — это механизмы, которые определяют порядок выполнения инструкций в программе: условия, циклы, исключения.
+
+Условные операторы (if/elif/else):
+x = 10
+
+if x > 0:
+    print("Положительное")
+elif x == 0:
+    print("Ноль")
+else:
+    print("Отрицательное")
+
+Важно: в Python блоки кода выделяются отступами (4 пробела), а не фигурными скобками.
+
+Цикл for:
+Используется для перебора элементов коллекции.
+
+# Перебор списка
+fruits = ["яблоко", "банан", "апельсин"]
+for fruit in fruits:
+    print(fruit)
+
+# Перебор диапазона чисел
+for i in range(5):      # 0, 1, 2, 3, 4
+    print(i)
+
+for i in range(1, 6):   # 1, 2, 3, 4, 5
+    print(i)
+
+# enumerate — получить индекс и значение
+for i, fruit in enumerate(fruits):
+    print(f"{i}: {fruit}")
+
+Цикл while:
+Выполняется пока условие True.
+
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+
+Операторы break и continue:
+- break — выйти из цикла досрочно.
+- continue — пропустить текущую итерацию.
+
+for i in range(10):
+    if i == 3:
+        continue  # пропускаем 3
+    if i == 7:
+        break     # останавливаемся на 7
+    print(i)
+
+Обработка исключений (try/except):
+Позволяет перехватывать ошибки и обрабатывать их без остановки программы.
+
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Деление на ноль!")
+except ValueError as e:
+    print(f"Ошибка значения: {e}")
+finally:
+    print("Это выполняется всегда")
+
+Генераторы списков (List Comprehensions):
+Краткая запись цикла для создания нового списка.
+
+# Обычный способ
+squares = []
+for x in range(10):
+    squares.append(x ** 2)
+
+# List comprehension — то же самое, но короче
+squares = [x ** 2 for x in range(10)]
+
+# С условием
+even_squares = [x ** 2 for x in range(10) if x % 2 == 0]

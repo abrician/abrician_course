@@ -88,33 +88,29 @@ cp configs/.env.example configs/.env
 
 ### 4.1. Запуск обучения модели
 
-```bash
-cd project
-source .venv/bin/activate      # при необходимости
-# Если есть скрипт обучения модели, используйте его. В текущей версии проекта обучение моделей выполняется внутри ноутбуков.
-# Например: python -m src.train
-```
+Обучение моделей выполняется внутри ноутбуков (`notebooks/`). Отдельного скрипта обучения нет — модели инициализируются при старте сервиса.
 
 ### 4.2. Запуск сервиса (API/веб-интерфейс)
 
 ```bash
 cd project
-source .venv/bin/activate      # при необходимости
-python -m src.service          # сервис запускается на локальном порту 8000 (http://localhost:8000)
+source .venv/bin/activate
+uvicorn src.service.api:app --reload
 ```
-Сервис запускается на локальном порту 8000 (http://localhost:8000) и предоставляет следующие эндпоинты:
 
-POST /ask — обработка пользовательского запроса
-GET /health — проверка состояния сервиса
+Сервис запускается на `http://localhost:8000` и предоставляет эндпоинты:
 
-Проверка работы через Swagger UI или тестовый запрос.
+- `POST /ask` — поиск по запросу пользователя
+- `GET /health` — проверка состояния сервиса
 
-Или, если используется Docker:
+Интерактивная документация (Swagger UI): `http://localhost:8000/docs`
+
+Или через Docker:
 
 ```bash
 cd project
-docker build -t aie-project .
-docker run -p 8000:8000 aie-project
+docker build -t rag-service .
+docker run -p 8000:8000 rag-service
 ```
 
 ---

@@ -62,4 +62,5 @@ logs/
 *.homeworks/HW08-09/data/
 *homeworks/HW10-11/data/
 *data/
+!project/data/
 *S12-hw-dataset.csv
