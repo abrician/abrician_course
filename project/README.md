@@ -80,7 +80,7 @@ pip install -r requirements.txt
 cp configs/.env.example configs/.env
 
 ```
-В .env можно добавить ключ API для LLM, если планируется использование OpenAI или другой языковой модели.
+В .env можно указать параметры локальной модели Ollama. Для работы проекта API-ключи не требуются.
 
 ---
 
@@ -94,7 +94,7 @@ cp configs/.env.example configs/.env
 
 ```bash
 cd project
-source .venv/bin/activate
+.venv\Scripts\Activate.ps1
 uvicorn src.service.api:app --reload
 ```
 
